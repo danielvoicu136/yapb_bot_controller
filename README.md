@@ -7,4 +7,5 @@ YAPB Bot Controller for Counter-Strike
 - Adds fake connection times and country information for bots.
 - Adds fake IP addresses and SteamIDs for bots.
 - Use the /map command to see the map name, spawn points, and current bot count.
+- Automatically respawns players on maps with spawn point errors.
 - More updates coming soon.
