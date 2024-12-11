@@ -1,3 +1,5 @@
+native freelook_over_local(id);
+
 ControlReplacer(iPlayer)
 {
 	static iTarget;
@@ -8,7 +10,15 @@ ControlReplacer(iPlayer)
 			
 		if(get_user_team(iPlayer) != get_user_team(iTarget))
 			return PLUGIN_HANDLED
+			
+	
+	
+		if(FIX_ADMIN_FREE_LOOK > 0)
+		{
+			freelook_over_local(iPlayer);
+		}
 		
+	
 		static Float:fPlane[3], Float:fOrigin[3], Float:fVelocity[3]
 		entity_get_vector(iTarget, EV_VEC_angles, fPlane)
 		entity_get_vector(iTarget, EV_VEC_origin, fOrigin)

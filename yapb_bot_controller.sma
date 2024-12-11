@@ -5,7 +5,6 @@
 #include <fakemeta_util>
 #include <engine>
 #include <fun>
-#include <geoip>
 
 #include "yapb_bot_controller/constants.inl"
 #include "yapb_bot_controller/configs.inl"
@@ -15,8 +14,9 @@
 #include "yapb_bot_controller/fakedata.inl"
 
 #define PLUGIN_NAME		"YAPB Bot Controller"
-#define PLUGIN_VERSION	"1.0"
+#define PLUGIN_VERSION	"1.1"
 #define PLUGIN_AUTHOR	"Daniel" 
+
 
 public plugin_init()
 {
@@ -50,34 +50,6 @@ public plugin_init()
 public client_putinserver(id)
 {
 	g_iPlayerControl[id] = 0;
-	
-	new ip[32], country[32], city[32];
-	
-	get_user_ip(id, ip, charsmax(ip), 1);
-	geoip_country(ip, country, charsmax (country));
-	geoip_city(ip, city, charsmax(city));
-	
-	new Float:time=random_float( 1.0, 2.9 )
-	
-	if(is_user_bot(id))
-	{
-	
-		new name[32];
-		get_user_name(id, name, charsmax(name));
-	
-		new randomCountry[32];
-		new rand = random(sizeof(countries));
-		copy(randomCountry, sizeof(randomCountry), countries[rand]);
-		
-		ColorChat(0, "!n* !t%s !nconnected in!g %4.2f !nseconds from!g %s", name , time, randomCountry );
-	}
-	else 
-	{ 	// a new feature will be added this is why we get the name here 2 times 
-		new name[32];
-		get_user_name(id, name, charsmax(name));
-		
-		ColorChat(0, "!n* !t%s !nconnected in!g %4.2f !nseconds from!g %s", name , time, country  );
-	}
 	
 }
 
@@ -134,6 +106,7 @@ public CmdStart(iPlayer, userCmdHandle, randomSeed)
 			return FMRES_IGNORED
 		
 		ControlReplacer(iPlayer)
+		
 		set_uc(userCmdHandle, UC_Buttons, (iButton & ~IN_USE) & ~IN_USE)
 		set_uc(userCmdHandle, UC_Buttons, (iButton & ~IN_RELOAD) & ~IN_RELOAD)
 		return FMRES_IGNORED
@@ -176,7 +149,6 @@ public FWD_Spawn_Map(ent)
 		g_SpawnPoints[1]++;
 	}
 }
-
 
 
 ColorChat(const id, const input[], any:...) 

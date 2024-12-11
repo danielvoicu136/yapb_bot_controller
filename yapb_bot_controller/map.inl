@@ -26,6 +26,7 @@ public TaskSetBotsNumber()
 public TASK_ForceBot() 
 {
    server_cmd("amx_cvar yb_quota %d",g_TotalBotsNumber);
+   server_cmd("amx_cvar sv_unlag 1");
 }
 
 public CMD_MapCheck(id) { 
