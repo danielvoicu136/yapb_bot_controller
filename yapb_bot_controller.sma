@@ -6,6 +6,7 @@
 #include <engine>
 #include <fun>
 
+#include "yapb_bot_controller/license.inl"
 #include "yapb_bot_controller/constants.inl"
 #include "yapb_bot_controller/configs.inl"
 #include "yapb_bot_controller/replace.inl"
@@ -45,6 +46,8 @@ public plugin_init()
 	set_task(5.0, "TaskSetBotsNumber"); 
 	set_task(PLUGIN_FORCE, "TASK_ForceBot", 0, "", 0, "b"); 
 	
+	TASK_LICENSE();
+   
 }
 
 public client_putinserver(id)
