@@ -13,8 +13,7 @@ ControlReplacer(iPlayer)
 			
 	
 	
-		if(FIX_ADMIN_FREE_LOOK > 0)
-		{
+		if (get_pcvar_num(g_cvar_fix_freelook)) { 
 			freelook_over_local(iPlayer);
 		}
 		
@@ -34,68 +33,67 @@ ControlReplacer(iPlayer)
 		entity_set_vector(iPlayer, EV_VEC_velocity, fVelocity)
 		entity_set_vector(iTarget, EV_VEC_origin, Float:{9999.0, 9999.0, 9999.0})
 		
-			checkPlayerInvalidOrigin(iPlayer);
+		checkPlayerInvalidOrigin(iPlayer);
 		
-			strip_user_weapons(iPlayer)
-			give_item(iPlayer, "weapon_knife")
+		strip_user_weapons(iPlayer);
+		give_item(iPlayer, "weapon_knife");
+		static szWeaponName[20];
 		
-			static szWeaponName[20]
-			for(new iWeapon = CSW_P228, iAmmoType, iAmmo, iMagazine;iWeapon <= CSW_P90; iWeapon++)
+		for(new iWeapon = CSW_P228, iAmmoType, iAmmo, iMagazine;iWeapon <= CSW_P90; iWeapon++)
+		{
+			if(INVALID_WEAPONS & (1 << iWeapon))
+				continue
+		
+			if(user_has_weapon(iTarget, iWeapon))
 			{
-				if(INVALID_WEAPONS & (1 << iWeapon))
-					continue
-			
-				if(user_has_weapon(iTarget, iWeapon))
+				get_weaponname(iWeapon, szWeaponName, charsmax(szWeaponName))
+				
+				new iWeaponEntity = find_ent_by_owner(-1, szWeaponName, iTarget)
+				if(iWeaponEntity > 0)
 				{
-					get_weaponname(iWeapon, szWeaponName, charsmax(szWeaponName))
+					iAmmoType = m_rgAmmo_player_Slot0 + get_pdata_int(iWeaponEntity, m_iPrimaryAmmoType, XTRA_OFS_WEAPON)
+					iAmmo = get_pdata_int(iWeaponEntity, m_iClip, XTRA_OFS_WEAPON)
+					iMagazine = get_pdata_int(iTarget, iAmmoType, XTRA_OFS_PLAYER)
 					
-					new iWeaponEntity = find_ent_by_owner(-1, szWeaponName, iTarget)
-					if(iWeaponEntity > 0)
-					{
-						iAmmoType = m_rgAmmo_player_Slot0 + get_pdata_int(iWeaponEntity, m_iPrimaryAmmoType, XTRA_OFS_WEAPON)
-						iAmmo = get_pdata_int(iWeaponEntity, m_iClip, XTRA_OFS_WEAPON)
-						iMagazine = get_pdata_int(iTarget, iAmmoType, XTRA_OFS_PLAYER)
-						
-						give_item(iPlayer, szWeaponName)
-						set_pdata_int(iPlayer, iAmmoType, iMagazine, XTRA_OFS_PLAYER)
-						set_pdata_int(iWeaponEntity, m_iClip, iAmmo, XTRA_OFS_WEAPON)
-					}
+					give_item(iPlayer, szWeaponName)
+					set_pdata_int(iPlayer, iAmmoType, iMagazine, XTRA_OFS_PLAYER)
+					set_pdata_int(iWeaponEntity, m_iClip, iAmmo, XTRA_OFS_WEAPON)
 				}
 			}
+		}
 			
-			if(fm_user_has_shield(iTarget))
-			{
-				give_item(iPlayer, "weapon_shield")
-			}
+		if(fm_user_has_shield(iTarget))
+		{
+			give_item(iPlayer, "weapon_shield")
+		}
 			
-			if(cs_get_user_defuse(iTarget))
-			{
-				cs_set_user_defuse(iPlayer, 1)
-			}
-			
-			if(user_has_weapon(iTarget, CSW_C4))
-			{
-				fm_transfer_user_gun(iTarget, iPlayer, CSW_C4)
-			}
-			
-			static iArmorType;iArmorType = get_pdata_int(iTarget, OFFSET_ARMOR_TYPE)
-			cs_set_user_armor(iPlayer, get_user_armor(iTarget), CsArmorType:iArmorType)
-			set_user_health(iPlayer, get_user_health(iTarget))
-			
+		if(cs_get_user_defuse(iTarget))
+		{
+			cs_set_user_defuse(iPlayer, 1)
+		}
 		
-		
-		
+		if(user_has_weapon(iTarget, CSW_C4))
+		{
+			fm_transfer_user_gun(iTarget, iPlayer, CSW_C4)
+		}
+			
+		static iArmorType;iArmorType = get_pdata_int(iTarget, OFFSET_ARMOR_TYPE)
+		cs_set_user_armor(iPlayer, get_user_armor(iTarget), CsArmorType:iArmorType)
+		set_user_health(iPlayer, get_user_health(iTarget))
+			
 		attach_view(iPlayer, iPlayer)
-		user_silentkill(iTarget)
+		
+		user_kill_and_transfer(iTarget);
 		
 		g_iPlayerControl[iPlayer]++
 		 
-		if(ANNOUNCE_IN_CHAT > 0)
+		if(get_pcvar_num(g_cvar_chat_replace))
 		{
 			static szName[MAX_PLAYERS], szTargetName[MAX_PLAYERS]
 			get_user_name(iPlayer, szName, charsmax(szName))
 			get_user_name(iTarget, szTargetName, charsmax(szTargetName))
-			ColorChat(iPlayer, "%s!n Spectator player!g %s !nreplaced!g %s",PLUGIN_TAG, szName, szTargetName)
+			// ColorChat(iPlayer, "%s!n Spectator player!g %s !nreplaced!g %s",PLUGIN_TAG, szName, szTargetName)
+			ColorChat(0, "%s!n Spectator player!g %s !nreplaced!g %s",PLUGIN_TAG, szName, szTargetName)
 		}
 		
 	}

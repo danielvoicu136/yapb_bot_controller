@@ -1,24 +1,20 @@
 // Configs and Options 
 
-#define PLUGIN_REMINDER 45.0					// How many seconds to the next chat info message   
+#define PLUGIN_TAG "!g*"  						// Tag for chat message 
 
-#define PLUGIN_TAG "!g[MAP]"  					// Tag for chat message 
+#define PLUGIN_SET_BOT 5.0							// Force bot number calculation 
+#define PLUGIN_FORCE_BOT 180.0						// Force set bot number time to time 
+#define PLUGIN_FORCE_BOMB 1.0						// Force bomb transfer time to time 
 
-#define PLUGIN_FORCE 120.0						// Force set bot number time to time 
 
-#define MAX_CONTROL 99   						// How many times players can use replace    
+#define BOT_STUCK_TIME 5.0 							// Freq of checks 
+#define BOT_STUCK_RADIUS 64.0 						// Radius of stuck 
 
-#define ANNOUNCE_IN_CHAT	0					// Print a message with replace history 0 OFF - 1 ON 
 
 #define ANNOUNCE_IN_HUD "| quick support and admin request on daeva.ro |^n| join chat and voice on discord.daeva.ro |"  
 
 
-// FIX and compatibility layer 
-
-#define FIX_ADMIN_FREE_LOOK 1					// Do the server use our yapb admin free look (find it in extra plugins folder)  0 NO - 1 YES  
-
-// Team Slots and Team Bots Number   			// Configure based on the team slots , the number of bots to be added (maps have different team slots) 
-
+// Team Slots , Team Bots Number   			
 new teamSpawnsBots[16][2] = {
     { 1 , 1 },
     { 2 , 1 },
@@ -29,12 +25,12 @@ new teamSpawnsBots[16][2] = {
     { 7 , 3 },
     { 8 , 4 },
     { 9 , 5 },
-    { 10 , 5 },
-    { 11 , 5 },
-    { 12 , 5 },
-    { 13 , 5 },
-    { 14 , 5 },
-    { 15 , 5 },
-    { 16 , 5 }
+    { 10 , 6 },
+    { 11 , 7 },
+    { 12 , 7 },
+    { 13 , 7 },
+    { 14 , 7 },
+    { 15 , 7 },
+    { 16 , 7 }
 };
 

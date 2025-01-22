@@ -78,10 +78,9 @@ public TASK_CheckCamping() {
 			
 			if(Meter[id] >= 99) 
 			{
-					formatex(Message,sizeof(Message)-1,"| Spectators can replace you |");
-				
-					 set_hudmessage(r, g, b, -1.0, 0.75, 0, 0.1, 1.0, 0.1, 0.1, -1)
-					 ShowSyncHudMsg(id, g_SyncObj, Message);
+				formatex(Message,sizeof(Message)-1,"| Spectators can replace you |");
+				set_hudmessage(r, g, b, -1.0, 0.75, 0, 0.1, 1.0, 0.1, 0.1, -1);
+				ShowSyncHudMsg(id, g_SyncObj, Message);
 			} 
 			else if(Meter[id] > 0) 
 			{ 

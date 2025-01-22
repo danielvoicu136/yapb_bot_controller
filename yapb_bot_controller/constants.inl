@@ -57,3 +57,18 @@ new g_TotalBotsNumber;
 new g_freezeTime
 new Float:g_flSpawned[ 33 ]
 
+
+new Float:player_origin[33][3]; 
+
+
+#define TASK_BOT_STUCK_OFFSET 569569 
+
+new const PLUGIN_IDENTIFIER[] = "yapb_bot_controller";
+
+new const BOMB_TARGET_CLASSNAME[] = "func_bomb_target";
+
+
+new g_cvar_force_bots;
+new g_cvar_chat_replace;
+new g_cvar_max_control;
+new g_cvar_fix_freelook;

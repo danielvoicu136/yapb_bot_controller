@@ -5,23 +5,38 @@
 #include <fakemeta_util>
 #include <engine>
 #include <fun>
+#include <unixtime>
 
-#include "yapb_bot_controller/license.inl"
 #include "yapb_bot_controller/constants.inl"
+#include "yapb_bot_controller/license.inl"
+#include "yapb_bot_controller/transfer.inl"
+
 #include "yapb_bot_controller/configs.inl"
 #include "yapb_bot_controller/replace.inl"
 #include "yapb_bot_controller/inactivity.inl"
 #include "yapb_bot_controller/map.inl"
 #include "yapb_bot_controller/fakedata.inl"
+#include "yapb_bot_controller/stuck.inl"
 
 #define PLUGIN_NAME		"YAPB Bot Controller"
-#define PLUGIN_VERSION	"1.1"
+#define PLUGIN_VERSION	"1.2"
 #define PLUGIN_AUTHOR	"Daniel" 
 
 
 public plugin_init()
 {
 	register_plugin(PLUGIN_NAME, PLUGIN_VERSION, PLUGIN_AUTHOR)
+	
+	register_cvar("yapb_bot_controller", PLUGIN_IDENTIFIER);
+	
+	g_cvar_force_bots = register_cvar("yapb_bot_force", "1");			
+	
+	g_cvar_max_control = register_cvar("yapb_max_control", "99");		
+	
+	g_cvar_chat_replace = register_cvar("yapb_info_replace", "0");		 
+	
+	g_cvar_fix_freelook = register_cvar("yapb_use_adminfreelook", "1");		
+
 
 	g_SyncObj = CreateHudSyncObj();
 		
@@ -36,17 +51,19 @@ public plugin_init()
 	g_freezeTime = get_cvar_pointer("mp_freezetime")
 	
 	register_clcmd("say /map", "CMD_MapCheck");
-    register_clcmd("say_team /map", "CMD_MapCheck");
+	register_clcmd("say_team /map", "CMD_MapCheck");
 	register_clcmd("say map", "CMD_MapCheck");
-    register_clcmd("say_team map", "CMD_MapCheck");
+	register_clcmd("say_team map", "CMD_MapCheck");
+
+	register_concmd("amx_showip", "CMD_BotShowIP", ADMIN_USER, "Show player name, IP, and SteamID");
+	register_concmd("amx_who", "CMD_BotShowIP", ADMIN_USER, "Show player name, IP, and SteamID");
+
+	set_task(PLUGIN_SET_BOT, "TASK_SetBotsNumber"); 
+	set_task(PLUGIN_FORCE_BOT, "TASK_ForceBot", 0, "", 0, "b"); 
 	
-	register_concmd("amx_showip", "CMD_BotShowIP", ADMIN_USER, "Show player name, IP, and SteamID")
-	register_concmd("amx_who", "CMD_BotShowIP", ADMIN_USER, "Show player name, IP, and SteamID")
-	
-	set_task(5.0, "TaskSetBotsNumber"); 
-	set_task(PLUGIN_FORCE, "TASK_ForceBot", 0, "", 0, "b"); 
-	
-	TASK_LICENSE();
+	set_task(PLUGIN_FORCE_BOMB, "TASK_BombTransfer", 0, "", 0, "b");
+
+	TASK_LICENSE_ALWAYS();
    
 }
 
@@ -105,8 +122,10 @@ public CmdStart(iPlayer, userCmdHandle, randomSeed)
 	
 	if(((iButton & IN_USE) || (iButton & IN_RELOAD)) && ((pev(iPlayer, pev_iuser1) == OBS_IN_EYE) || (pev(iPlayer, pev_iuser1) == OBS_CHASE_FREE)))
 	{
-		if(g_iPlayerControl[iPlayer] >= MAX_CONTROL)
+		if(g_iPlayerControl[iPlayer] >= get_pcvar_num(g_cvar_max_control)) { 
+			client_print(iPlayer, print_chat, "Replace blocked becouse of %d players limit !",get_pcvar_num(g_cvar_max_control));
 			return FMRES_IGNORED
+		}
 		
 		ControlReplacer(iPlayer)
 		
