@@ -13,7 +13,10 @@ public TASK_Bot_Stuck(task_id)
         if (has_alive_teammates(id))
         {
          
+		if (get_pcvar_num(g_cvar_afk_bots_slay)) { 
 			user_kill_and_transfer(id);
+		}
+			
             /*
                 new name[33];
                 get_user_name(id, name, 32);

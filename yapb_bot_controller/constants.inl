@@ -72,3 +72,12 @@ new g_cvar_force_bots;
 new g_cvar_chat_replace;
 new g_cvar_max_control;
 new g_cvar_fix_freelook;
+new g_cvar_afk_bots_slay;
+new Float:g_cvar_hud_x;
+new Float:g_cvar_hud_y;
+new g_cvar_force_bots_number;
+
+new g_cvar_hud_r;
+new g_cvar_hud_g;
+new g_cvar_hud_b;
+new g_cvar_adminonly;

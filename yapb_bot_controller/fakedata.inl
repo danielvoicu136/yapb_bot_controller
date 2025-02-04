@@ -1,5 +1,11 @@
 public CMD_BotShowIP(id) {
 
+    if(get_pcvar_num(g_cvar_adminonly) && !is_user_admin(id))
+    {
+		console_print(id, "|======= Admins Only AMX_SHOWIP ============|");
+        return PLUGIN_HANDLED;
+    }
+
 	console_print(id, "|=====================================|");
 	
 	new i, players[32], numPlayers;

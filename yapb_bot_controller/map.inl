@@ -29,6 +29,10 @@ public TASK_SetBotsNumber()
 
 public TASK_ForceBot() 
 {
+	if (get_pcvar_num(g_cvar_force_bots_number)) { 	
+		g_TotalBotsNumber = get_pcvar_num(g_cvar_force_bots_number);
+	}
+		
 	if (get_pcvar_num(g_cvar_force_bots)) { 
 	server_cmd("amx_cvar yb_quota %d",g_TotalBotsNumber);
 	server_cmd("amx_cvar sv_unlag 1");

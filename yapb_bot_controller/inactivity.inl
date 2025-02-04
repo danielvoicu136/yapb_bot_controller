@@ -1,5 +1,13 @@
 public TASK_CheckCamping() {
 
+	new Float:X_POS = get_pcvar_float(g_cvar_hud_x);
+	new Float:Y_POS	= get_pcvar_float(g_cvar_hud_y);
+	
+	new R_HUD = get_pcvar_num(g_cvar_hud_r);
+	new G_HUD = get_pcvar_num(g_cvar_hud_g);
+	new B_HUD = get_pcvar_num(g_cvar_hud_b);
+	
+
 	if(get_cvar_float("mp_timelimit") && !get_timeleft() || ChangeLevel)
 		return;
 	
@@ -79,14 +87,14 @@ public TASK_CheckCamping() {
 			if(Meter[id] >= 99) 
 			{
 				formatex(Message,sizeof(Message)-1,"| Spectators can replace you |");
-				set_hudmessage(r, g, b, -1.0, 0.75, 0, 0.1, 1.0, 0.1, 0.1, -1);
+				set_hudmessage(r, g, b, X_POS, Y_POS, 0, 0.1, 1.0, 0.1, 0.1, -1);
 				ShowSyncHudMsg(id, g_SyncObj, Message);
 			} 
 			else if(Meter[id] > 0) 
 			{ 
 					formatex(Message,sizeof(Message)-1,"| inactivity: %d |", Meter[id]);
 					
-					set_hudmessage(r, g, b, -1.0, 0.75, 0, 0.1, 1.0, 0.1, 0.1, -1)
+					set_hudmessage(r, g, b, X_POS, Y_POS, 0, 0.1, 1.0, 0.1, 0.1, -1)
 					ShowSyncHudMsg(id, g_SyncObj, Message);
 			}
 			
@@ -121,7 +129,7 @@ public TASK_CheckCamping() {
 					formatex(Message,sizeof(Message)-1,"%s",ANNOUNCE_IN_HUD);
 				}
 			
-				set_hudmessage(0, 255, 0, -1.0, 0.75, 0, 0.1, 1.0, 0.1, 0.1, -1)
+				set_hudmessage(R_HUD, G_HUD, B_HUD, X_POS, Y_POS, 0, 0.1, 1.0, 0.1, 0.1, -1)
 				ShowSyncHudMsg(Spectator, g_SyncObj, Message);
 
 			}
@@ -130,7 +138,7 @@ public TASK_CheckCamping() {
 			{ 
 				new Message[256];
 				formatex(Message,sizeof(Message)-1,"| Good Luck and Have Fun |");
-				set_hudmessage(0, 255, 0, -1.0, 0.75, 0, 0.1, 1.0, 0.1, 0.1, -1)
+				set_hudmessage(R_HUD, G_HUD, B_HUD, X_POS, Y_POS, 0, 0.1, 1.0, 0.1, 0.1, -1)
 				ShowSyncHudMsg(Spectator, g_SyncObj, Message);
 			}
 			

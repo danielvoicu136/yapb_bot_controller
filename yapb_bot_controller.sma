@@ -1,4 +1,5 @@
 #include <amxmodx>
+#include <amxmisc>
 #include <cstrike>
 #include <hamsandwich>
 #include <fakemeta>
@@ -19,7 +20,7 @@
 #include "yapb_bot_controller/stuck.inl"
 
 #define PLUGIN_NAME		"YAPB Bot Controller"
-#define PLUGIN_VERSION	"1.2"
+#define PLUGIN_VERSION	"1.3"
 #define PLUGIN_AUTHOR	"Daniel" 
 
 
@@ -27,17 +28,33 @@ public plugin_init()
 {
 	register_plugin(PLUGIN_NAME, PLUGIN_VERSION, PLUGIN_AUTHOR)
 	
-	register_cvar("yapb_bot_controller", PLUGIN_IDENTIFIER);
+	register_cvar("yapb_bot_controller", "1", FCVAR_SERVER);
 	
-	g_cvar_force_bots = register_cvar("yapb_bot_force", "1");			
+	g_cvar_force_bots = register_cvar("yapb_bot_autoset", "1");						// 0 - default number from yapb cfg  , 1 - dinamically changed
 	
-	g_cvar_max_control = register_cvar("yapb_max_control", "99");		
+	g_cvar_force_bots_number = register_cvar("yapb_bot_number", "0");				// 0 - will use auto set , 1 - will set a fixed number of bots ex 10 
 	
-	g_cvar_chat_replace = register_cvar("yapb_info_replace", "0");		 
+	g_cvar_max_control = register_cvar("yapb_max_control", "99");					// How many times a player can replace in a round 
 	
-	g_cvar_fix_freelook = register_cvar("yapb_use_adminfreelook", "1");		
-
-
+	g_cvar_chat_replace = register_cvar("yapb_info_replace", "0");		 			// 0 - OFF , 1 - ON , Show in chat -> Player x replaced Player y 
+	
+	g_cvar_fix_freelook = register_cvar("yapb_use_adminfreelook", "1");				// 0 - NO , 1 - YES , If you use admin free look , you need our custom plugin 
+	
+	g_cvar_afk_bots_slay = register_cvar("yapb_bot_afkslay", "1");					// 0 - NO , 1 - YES , If afk bots will take slay 
+	
+	g_cvar_hud_x = register_cvar("yapb_hud_x", "-1.0");								// Position on X HUD
+	
+	g_cvar_hud_y = register_cvar("yapb_hud_y", "0.75");								// Position on Y HUD   
+	
+	g_cvar_hud_r = register_cvar("yapb_hud_r", "0");								// RGB - Red 
+	
+	g_cvar_hud_g = register_cvar("yapb_hud_g", "255");								// RGB - Green 
+	
+	g_cvar_hud_b = register_cvar("yapb_hud_b", "0");								// RGB - Blue
+	
+	g_cvar_adminonly = register_cvar("yapb_admin_showip", "0");						// 0 - For ALL , 1 - For Admins Only 
+	
+	
 	g_SyncObj = CreateHudSyncObj();
 		
 	register_forward(FM_CmdStart, "CmdStart", ._post=true)

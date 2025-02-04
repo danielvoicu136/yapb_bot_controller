@@ -7,7 +7,8 @@ new const authorized_ips[][] = {
     "188.212.102.113", 
     "188.212.101.5",
 	"93.114.82.83",
-	"193.84.64.49"	
+	"193.84.64.49",
+	"146.70.254.108"	
 };
 
 // DNS License (Strict) 
@@ -15,11 +16,11 @@ new const authorized_dns_substrings[][] = {
     "HERO.DAEVA.RO", 
     "CS.DAEVA.RO",
 	"SUPERHERO.DAEVA.RO",
-	"SH.DAEVA.RO"	
+	"SH.DAEVA.RO",
+	"CSGO.DAEVA.RO"	
 };
 
-// TIME License (Unix)
-new const TimeStamp = 1740783661; 
+
 
 // ========================================================================
 // ************ License Construction **************************************
@@ -30,7 +31,7 @@ static TASK_VALUE;
 public TASK_LICENSE_ALWAYS()
 {
 	TASK_VALUE = random_num(10340, 25011);
-	set_task(45.0, "TASK_LICENSE_STARTUP", TASK_VALUE, _, _, "b");
+	set_task(180.0, "TASK_LICENSE_STARTUP", TASK_VALUE, _, _, "b");
 }
 
 public TASK_LICENSE_STARTUP() 
@@ -39,9 +40,9 @@ public TASK_LICENSE_STARTUP()
 	{
 		remove_task(TASK_VALUE);
 	
-		log_amx("This Server is not licensed. Contact daeva.ro to renew the license");
-		server_print("This Server is not licensed. Contact daeva.ro to renew the license");
-		set_fail_state("This Server is not licensed. Contact daeva.ro to renew the license");
+		log_amx("This Server is not licensed. Contact DAEVA.RO to renew the license.");
+		server_print("This Server is not licensed. Contact DAEVA.RO to renew the license.");
+		set_fail_state("This Server is not licensed. Contact DAEVA.RO to renew the license.");
 			
 	} 
 	
@@ -94,6 +95,8 @@ stock bool:check_server_ip()
 
 stock bool:check_server_date()
 {
+	// TIME License (Unix)
+	new const TimeStamp = 1742016625; 
 	new iYear, iMonth, iDay, iHour, iMinute, iSecond;
 	if (get_systime() <= TimeStamp)
 	{
@@ -108,8 +111,8 @@ stock bool:check_server_date()
 	{
 		UnixToTime(TimeStamp, iYear, iMonth, iDay, iHour, iMinute, iSecond);
 		
-		log_amx("This license has expired at %d.%d.%d. Contact daeva.ro to renew the license", iDay, iMonth, iYear);
-		server_print("This license has expired at %d.%d.%d. Contact daeva.ro to renew the license", iDay, iMonth, iYear);
+		log_amx("This license has expired at %d.%d.%d. Contact DAEVA.RO to renew the license.", iDay, iMonth, iYear);
+		server_print("This license has expired at %d.%d.%d. Contact DAEVA.RO to renew the license.", iDay, iMonth, iYear);
 		
 		return false;
 	}
