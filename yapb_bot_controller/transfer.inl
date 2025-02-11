@@ -7,7 +7,7 @@ public user_kill_and_transfer(id)
 {
 	if (!is_user_connected(id) || !is_user_alive(id)) 
 	{
-	return; 
+		return; 
 	}
 
 	user_silentkill(id);
@@ -85,12 +85,12 @@ stock bool:is_in_bombsite(id)
 
 stock bool:entity_is_bombsite(ent)
 {
-    new classname[32]; 
-    entity_get_string(ent, EV_SZ_classname, classname, charsmax(classname)); 
-    return equali(classname, BOMB_TARGET_CLASSNAME);
+	new classname[32]; 
+	entity_get_string(ent, EV_SZ_classname, classname, charsmax(classname)); 
+	return equali(classname, BOMB_TARGET_CLASSNAME);
 }
 
-stock transfer_bomb(carrier, id)
+public transfer_bomb(carrier, id)
 {
     if (carrier > 0 && is_user_alive(carrier) && is_user_alive(id)) 
     {

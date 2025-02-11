@@ -63,8 +63,6 @@ new Float:player_origin[33][3];
 
 #define TASK_BOT_STUCK_OFFSET 569569 
 
-new const PLUGIN_IDENTIFIER[] = "yapb_bot_controller";
-
 new const BOMB_TARGET_CLASSNAME[] = "func_bomb_target";
 
 

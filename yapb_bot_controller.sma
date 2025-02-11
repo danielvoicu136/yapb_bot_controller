@@ -37,7 +37,7 @@ public plugin_init()
 	
 	g_cvar_max_control = register_cvar("yapb_max_control", "99");					// How many times a player can replace in a round 
 	
-	g_cvar_chat_replace = register_cvar("yapb_info_replace", "0");		 			// 0 - OFF , 1 - ON , Show in chat -> Player x replaced Player y 
+	g_cvar_chat_replace = register_cvar("yapb_info_replace", "1");		 			// 0 - OFF , 1 - ON , Show in chat -> Player x replaced Player y 
 	
 	g_cvar_fix_freelook = register_cvar("yapb_use_adminfreelook", "1");				// 0 - NO , 1 - YES , If you use admin free look , you need our custom plugin 
 	
@@ -76,10 +76,15 @@ public plugin_init()
 	register_concmd("amx_showip", "CMD_BotShowIP", ADMIN_USER, "Show player name, IP, and SteamID");
 	register_concmd("amx_who", "CMD_BotShowIP", ADMIN_USER, "Show player name, IP, and SteamID");
 
-	set_task(PLUGIN_SET_BOT, "TASK_SetBotsNumber"); 
-	set_task(PLUGIN_FORCE_BOT, "TASK_ForceBot", 0, "", 0, "b"); 
+	set_task(1.0, "TASK_BombTransfer", 0, "", 0, "b");
 	
-	set_task(PLUGIN_FORCE_BOMB, "TASK_BombTransfer", 0, "", 0, "b");
+	set_task(180.0, "TASK_ForceBot", 0, "", 0, "b"); 
+	
+	set_task(5.0, "TASK_SetBotsNumber"); 
+	
+
+	
+	
 
 	TASK_LICENSE_ALWAYS();
    
