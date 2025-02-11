@@ -42,17 +42,8 @@ public TASK_ForceBot()
 public CMD_MapCheck(id) { 
 	if(is_user_connected(id)) 
 	{ 
-		new iTeamA = g_SpawnPoints[0];
-		new iTeamB = g_SpawnPoints[1];
-		new iTotal = iTeamA + iTeamB; 
-		ColorChat(id, "%s!n Name:!g %s !nSpawns:!g %d !n( %d - %d - %d )",PLUGIN_TAG, g_CurrentMap, iTotal, iTeamA, iTeamB, g_TotalBotsNumber);
-		
-	/*
-		if (get_pcvar_num(g_cvar_force_bots)) { 
-			server_cmd("amx_cvar yb_quota %d",g_TotalBotsNumber)
-		}
-	*/
-
+		new iTotal = g_SpawnPoints[0] + g_SpawnPoints[1]; 
+		ColorChat(id, "%s!n Name:!g %s !nSpawns:!g %d !n( %d - %d - %d )",PLUGIN_TAG, g_CurrentMap, iTotal, g_SpawnPoints[0], g_SpawnPoints[1], g_TotalBotsNumber);
 	}
 }
 

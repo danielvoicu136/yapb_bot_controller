@@ -20,7 +20,7 @@
 #include "yapb_bot_controller/stuck.inl"
 
 #define PLUGIN_NAME		"YAPB Bot Controller"
-#define PLUGIN_VERSION	"1.3"
+#define PLUGIN_VERSION	"1.4"
 #define PLUGIN_AUTHOR	"Daniel" 
 
 
@@ -28,11 +28,12 @@ public plugin_init()
 {
 	register_plugin(PLUGIN_NAME, PLUGIN_VERSION, PLUGIN_AUTHOR)
 	
-	register_cvar("yapb_bot_controller", "1", FCVAR_SERVER);
+	register_cvar("yapb_bot_controller",PLUGIN_VERSION, FCVAR_SERVER|FCVAR_SPONLY|FCVAR_UNLOGGED);
+	register_cvar("yapbcontroller", PLUGIN_VERSION, FCVAR_SERVER|FCVAR_SPONLY|FCVAR_UNLOGGED);
 	
 	g_cvar_force_bots = register_cvar("yapb_bot_autoset", "1");						// 0 - default number from yapb cfg  , 1 - dinamically changed
 	
-	g_cvar_force_bots_number = register_cvar("yapb_bot_number", "0");				// 0 - will use auto set , 1 - will set a fixed number of bots ex 10 
+	g_cvar_force_bots_number = register_cvar("yapb_bot_number", "0");				// 0 - no fixed bots , value - will set a fixed number of bots ex 10 
 	
 	g_cvar_max_control = register_cvar("yapb_max_control", "99");					// How many times a player can replace in a round 
 	

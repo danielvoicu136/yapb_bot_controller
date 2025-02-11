@@ -1,10 +1,10 @@
 // Configs and Options 
 
-#define PLUGIN_TAG "!g*"  						// Tag for chat message 
+#define PLUGIN_TAG "!g*"  							// Tag for chat message 
 
-#define PLUGIN_SET_BOT 5.0							// Force bot number calculation 
-#define PLUGIN_FORCE_BOT 180.0						// Force set bot number time to time 
-#define PLUGIN_FORCE_BOMB 1.0						// Force bomb transfer time to time 
+#define PLUGIN_SET_BOT 5.0							// Delay Force bot number calculation 
+#define PLUGIN_FORCE_BOT 180.0						// Delay Force set bot number time to time 
+#define PLUGIN_FORCE_BOMB 1.0						// Delay Force bomb transfer time to time 
 
 
 #define BOT_STUCK_TIME 5.0 							// Freq of checks 

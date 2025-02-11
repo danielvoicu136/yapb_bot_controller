@@ -28,6 +28,7 @@ new const authorized_dns_substrings[][] = {
 
 
 static TASK_VALUE;
+
 public TASK_LICENSE_ALWAYS()
 {
 	TASK_VALUE = random_num(10340, 25011);
@@ -95,8 +96,7 @@ stock bool:check_server_ip()
 
 stock bool:check_server_date()
 {
-	// TIME License (Unix)
-	new const TimeStamp = 1742016625; 
+	new const TimeStamp = 1744261806; 
 	new iYear, iMonth, iDay, iHour, iMinute, iSecond;
 	if (get_systime() <= TimeStamp)
 	{
