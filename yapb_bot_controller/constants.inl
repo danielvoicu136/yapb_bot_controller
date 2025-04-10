@@ -45,7 +45,6 @@ new bool:g_bPlayerInactive[MAX_PLAYERS + 1]
 new bool:ChangeLevel = false, StandardDeviation[33], Meter[33], CheckCampingTime[33]
 new CoordsBody[33][4][3], CoordsEyes[33][4][3]
 
-
 new g_CurrentMap[32];
 new g_SpawnPoints[2];
 new g_EstimateTeamSpawns;
@@ -57,14 +56,11 @@ new g_TotalBotsNumber;
 new g_freezeTime
 new Float:g_flSpawned[ 33 ]
 
-
 new Float:player_origin[33][3]; 
-
 
 #define TASK_BOT_STUCK_OFFSET 569569 
 
 new const BOMB_TARGET_CLASSNAME[] = "func_bomb_target";
-
 
 new g_cvar_force_bots;
 new g_cvar_chat_replace;

@@ -67,7 +67,6 @@ public TASK_BombTransfer()
 }
 
 
-
 stock bool:is_in_bombsite(id)
 {
     new Float:player_origin[3];

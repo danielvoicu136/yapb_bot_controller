@@ -7,6 +7,7 @@
 #include <engine>
 #include <fun>
 #include <unixtime>
+#include <reapi>
 
 #include "yapb_bot_controller/constants.inl"
 #include "yapb_bot_controller/license.inl"
@@ -20,13 +21,15 @@
 #include "yapb_bot_controller/stuck.inl"
 
 #define PLUGIN_NAME		"YAPB Bot Controller"
-#define PLUGIN_VERSION	"1.4"
+#define PLUGIN_VERSION	"1.5"
 #define PLUGIN_AUTHOR	"Daniel" 
 
 
 public plugin_init()
 {
 	register_plugin(PLUGIN_NAME, PLUGIN_VERSION, PLUGIN_AUTHOR)
+	
+	RegisterHookChain(RH_ExecuteServerStringCmd, "ExecuteServerString")
 	
 	register_cvar("yapb_bot_controller",PLUGIN_VERSION, FCVAR_SERVER|FCVAR_SPONLY|FCVAR_UNLOGGED);
 	register_cvar("yapbcontroller", PLUGIN_VERSION, FCVAR_SERVER|FCVAR_SPONLY|FCVAR_UNLOGGED);
@@ -82,10 +85,6 @@ public plugin_init()
 	
 	set_task(5.0, "TASK_SetBotsNumber"); 
 	
-
-	
-	
-
 	TASK_LICENSE_ALWAYS();
    
 }

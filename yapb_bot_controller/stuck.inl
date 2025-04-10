@@ -1,8 +1,5 @@
-
-
 public TASK_Bot_Stuck(task_id)
 {
-   
     new id = task_id - TASK_BOT_STUCK_OFFSET;
 
     if (!is_user_alive(id) || !is_user_bot(id))
@@ -10,18 +7,13 @@ public TASK_Bot_Stuck(task_id)
 
     if (same_origin(id))
     {
-        if (has_alive_teammates(id))
+        if (has_alive_teammates(id) && !is_in_bombsite(id))
         {
          
-		if (get_pcvar_num(g_cvar_afk_bots_slay)) { 
-			user_kill_and_transfer(id);
-		}
+			if (get_pcvar_num(g_cvar_afk_bots_slay)) { 
+				user_kill_and_transfer(id);
+			}
 			
-            /*
-                new name[33];
-                get_user_name(id, name, 32);
-                client_print(0, print_chat, "%s (bot) was slain for stuck.", name);
-            */
         }
     }
     else

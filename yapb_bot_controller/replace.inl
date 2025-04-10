@@ -89,7 +89,6 @@ ControlReplacer(iPlayer)
 			static szName[MAX_PLAYERS], szTargetName[MAX_PLAYERS]
 			get_user_name(iPlayer, szName, charsmax(szName))
 			get_user_name(iTarget, szTargetName, charsmax(szTargetName))
-			// ColorChat(iPlayer, "%s!n Spectator player!g %s !nreplaced!g %s",PLUGIN_TAG, szName, szTargetName)
 			ColorChat(0, "%s!n Spectator player!g %s !nreplaced!g %s",PLUGIN_TAG, szName, szTargetName)
 		}
 		

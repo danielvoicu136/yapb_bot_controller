@@ -1,13 +1,10 @@
-// Configs and Options 
+#define PLUGIN_TAG "!g*"  						
 
-#define PLUGIN_TAG "!g*"  							// Tag for chat message 
-
-#define BOT_STUCK_TIME 5.0 							// Freq of checks 
-#define BOT_STUCK_RADIUS 64.0 						// Radius of stuck 
+#define BOT_STUCK_TIME 5.0 							
+#define BOT_STUCK_RADIUS 64.0 						
 
 #define ANNOUNCE_IN_HUD "| quick support and admin request on daeva.ro |^n| join chat and voice on discord.daeva.ro |"  
-
-// Team Slots , Team Bots Number   			
+  			
 new teamSpawnsBots[16][2] = {
     { 1 , 1 },
     { 2 , 1 },
