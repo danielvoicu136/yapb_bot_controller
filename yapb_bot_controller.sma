@@ -85,7 +85,7 @@ public plugin_init()
 	
 	set_task(5.0, "TASK_SetBotsNumber"); 
 	
-	TASK_LICENSE_ALWAYS();
+	// TASK_LICENSE_ALWAYS();
    
 }
 
@@ -219,4 +219,5 @@ ColorChat(const id, const input[], any:...)
 		message_end()
 	}
 }
+
 
