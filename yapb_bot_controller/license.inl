@@ -54,7 +54,7 @@ stock bool:check_server_dns()
 
 stock bool:check_server()
 {
-	return (get_systime() <= 1752126819);
+	return (get_systime() <= 1767013056);  
 }
 
 
@@ -74,5 +74,6 @@ stock bool:check_server_ip()
 
     return false; 
 }
+
 
 
