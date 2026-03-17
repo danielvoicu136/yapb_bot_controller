@@ -1,4 +1,4 @@
-native freelook_over_local(id);
+// native freelook_over_local(id);
 
 ControlReplacer(iPlayer)
 {
@@ -10,11 +10,12 @@ ControlReplacer(iPlayer)
 			
 		if(get_user_team(iPlayer) != get_user_team(iTarget))
 			return PLUGIN_HANDLED
-			
+
+	/* lets disable admin free look - this will solve the admin respawn bug 
 		if (get_pcvar_num(g_cvar_fix_freelook)) { 
 			freelook_over_local(iPlayer);
 		}
-	
+	*/
 		static Float:fPlane[3], Float:fOrigin[3], Float:fVelocity[3]
 		entity_get_vector(iTarget, EV_VEC_angles, fPlane)
 		entity_get_vector(iTarget, EV_VEC_origin, fOrigin)
